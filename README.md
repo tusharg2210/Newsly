@@ -72,7 +72,13 @@ This project necessitates an API key from [NewsAPI](https://newsapi.org/) for th
 1.  In the root directory of the project, create a file named `.env`.
 2.  Populate the `.env` file with your API key, adhering to the format specified below:
     ```env
-    VITE_NEWS_API_KEY=your_actual_api_key_here
+    VITE_NEWS_API_KEY="Your_API_KEY"
+    VITE_NEWS_API_KEY_1="Your_API_KEY"
+    VITE_APPWRITE_URL="Your_APPWRITE_URL"
+    VITE_APPWRITE_PROJECT_ID="Your_APPWRITE_PROJECT_ID"
+    VITE_APPWRITE_DATABASE_ID="Your_APPWRITE_DATABASE_ID"
+    VITE_APPWRITE_COLLECTION_ID="Your_APPWRITE_COLLECTION_ID"
+    VITE_APPWRITE_BUCKET_ID="Your_APPWRITE_BUCKET_ID"
     ```
     *(Note: For projects utilizing Vite, it is mandatory that environment variable names are prefixed with `VITE_`)*
 
@@ -101,4 +107,4 @@ Tushar
 * **LinkedIn**: [linkedin.com/in/tushargnita/](https://www.linkedin.com/in/tushargnita/)
 * **GitHub**: [github.com/tusharg2210](https://github.com/tusharg2210)
 
-**Project Repository**: [https://github.com/your-username/newsly-app](https://github.com/your-username/newsly-app)
+**Project Repository**: [https://github.com/your-username/newsly-app](https://github.com/tusharg2210/Newsly)

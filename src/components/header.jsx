@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import { useLocation, useNavigate, Link as RouterLink } from "react-router-dom";
-import CategoryDropdown from "./CategoryDropdown";
+import CategoryDropdown from "./categoryDropdown";
 
 function Header({ onSearch, searchQuery }) {
     const [isSearchOpen, setIsSearchOpen] = useState(false);

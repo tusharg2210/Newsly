@@ -57,8 +57,8 @@ The following instructions provide a comprehensive guide for establishing a loca
 
 1.  **Clone the Source Repository:**
     ```bash
-    git clone [https://github.com/your-username/newsly-app.git](https://github.com/your-username/newsly-app.git)
-    cd newsly-app
+    git clone https://github.com/tusharg2210/Newsly
+    cd Newsly
     ```
 2.  **Install Project Dependencies:**
     ```bash

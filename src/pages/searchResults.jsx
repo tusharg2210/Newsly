@@ -18,7 +18,7 @@ function SearchResults() {
     const [error, setError] = useState(null);
 
     const articlesPerPage = 9;
-    const apiKey =  import.meta.env.VITE_NEWS_API_KEY || import.meta.env.VITE_NEWS_API_KEY_1 || '6fded117301c45be8677c8120629902e';
+    const apiKey = import.meta.env.VITE_NEWS_API_KEY || import.meta.env.VITE_NEWS_API_KEY_1 || '6fded117301c45be8677c8120629902e';
 
     useEffect(() => {
         // Reset to page 1 when query in the URL changes

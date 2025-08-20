@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Newspaper, Briefcase, Globe, BarChart2 } from 'lucide-react';
-import { RiHeart2Fill } from 'react-icons/ri';
+import { ChevronDown, Newspaper, Briefcase, Globe, BarChart2, Heart } from 'lucide-react';
 
 // Define your categories with paths, descriptions, and icons
 const categoryItems = [
@@ -11,7 +10,7 @@ const categoryItems = [
     { name: 'Business', to: '/search?q=business', description: 'Market trends and financial news.', icon: Briefcase },
     { name: 'World', to: '/search?q=world', description: 'Global events and politics.', icon: Globe },
     { name: 'Sports', to: '/search?q=sports', description: 'Scores, highlights, and more.', icon: BarChart2 },
-    { name: 'Health', to: '/search?q=health', description: 'Wellness tips and medical news.', icon: RiHeart2Fill },
+    { name: 'Health', to: '/search?q=health', description: 'Wellness tips and medical news.', icon: Heart },
 ];
 
 function CategoryDropdown() {

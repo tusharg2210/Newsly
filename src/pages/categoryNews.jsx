@@ -6,9 +6,7 @@ import ScrollToTopButton from "../components/scrollToTop";
 function CategoryNews() {
     const { categoryName } = useParams();
     
-
-    
-    const apiKey =  import.meta.env.VITE_NEWS_API_KEY || import.meta.env.VITE_NEWS_API_KEY_1 || '6fded117301c45be8677c8120629902e';
+    const apiKey = import.meta.env.VITE_NEWS_API_KEY || import.meta.env.VITE_NEWS_API_KEY_1 || '6fded117301c45be8677c8120629902e';
     let url = `https://newsapi.org/v2/everything?q=${categoryName}&apiKey=${apiKey}`;
 
     const [news, setNews] = useState([]);

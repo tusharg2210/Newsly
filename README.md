@@ -4,6 +4,11 @@
 
 Newsly is a sophisticated and fully responsive news aggregator application developed utilizing React and Vite. The platform is engineered to deliver a fluid and compelling user experience for accessing contemporary headlines, conducting targeted topic searches, and exploring a diverse range of news categories. The application's design prioritizes a clean user interface, elegant animations, and a strong emphasis on performance and readability.
 
+<br>
+<img width="1440" height="816" alt="Screenshot 2025-08-20 at 5 19 58 PM" src="https://github.com/user-attachments/assets/6de252e1-ce4d-4792-8e90-ab6f1bb160dd" />
+
+<br>
+
 ## Core Functionalities
 
 * **Dynamic News Aggregation**: The system fetches and renders the latest news articles by interfacing with the [NewsAPI](https://newsapi.org/).

@@ -107,4 +107,4 @@ Tushar
 * **LinkedIn**: [linkedin.com/in/tushargnita/](https://www.linkedin.com/in/tushargnita/)
 * **GitHub**: [github.com/tusharg2210](https://github.com/tusharg2210)
 
-**Project Repository**: [https://github.com/your-username/newsly-app](https://github.com/tusharg2210/Newsly)
+**Project Repository**: [https://github.com/tusharg2210/Newsly](https://github.com/tusharg2210/Newsly)

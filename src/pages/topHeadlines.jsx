@@ -10,7 +10,7 @@ function TopHeadlines() {
     const [error, setError] = useState(null);
 
     
-    const apiKey =  'yourapikey';
+    const apiKey =  import.meta.env.VITE_NEWS_API_KEY || import.meta.env.VITE_NEWS_API_KEY_1 || '6fded117301c45be8677c8120629902e';
     let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
     
     useEffect(() => {

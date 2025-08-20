@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom'; // Import useLocation
 import NewsCard from '../components/newsCard';
+import ErrorDisplay from '../components/errorDisplay';
 
 function SearchResults() {
     const location = useLocation();
@@ -14,9 +15,10 @@ function SearchResults() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [totalResults, setTotalResults] = useState(0);
+    const [error, setError] = useState(null);
 
     const articlesPerPage = 9;
-    const apiKey = import.meta.env.VITE_NEWS_API_KEY || import.meta.env.VITE_NEWS_API_KEY_1;
+    const apiKey =  'yourapikey';
 
     useEffect(() => {
         // Reset to page 1 when query in the URL changes
@@ -32,21 +34,22 @@ function SearchResults() {
             }
 
             setLoading(true);
+            setError(null);
             try {
-                const url = `https://newsapi.org/v2/everything?q=${query}&page=${currentPage}&pageSize=${articlesPerPage}&apiKey=${apiKey}`;
+                const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&page=${currentPage}&pageSize=${articlesPerPage}&apiKey=${apiKey}`;
                 const response = await fetch(url);
                 const data = await response.json();
 
-                if (data.status === 'ok') {
-                    setResults(data.articles || []);
-                    setTotalResults(data.totalResults || 0);
-                    setTotalPages(Math.ceil(data.totalResults / articlesPerPage));
-                } else {
-                    console.error('API Error:', data.message);
-                    setResults([]);
+                if (!response.ok || data.status === 'error') {
+                    throw new Error(data.message || 'Failed to fetch search results.');
                 }
-            } catch (error) {
-                console.error('Error fetching search results:', error);
+
+                setResults(data.articles || []);
+                setTotalResults(data.totalResults || 0);
+                setTotalPages(Math.ceil(data.totalResults / articlesPerPage));
+            } catch (err) {
+                console.error('Error fetching search results:', err);
+                setError(err.message);
                 setResults([]);
             } finally {
                 setLoading(false);
@@ -54,7 +57,7 @@ function SearchResults() {
         };
 
         fetchSearchResults();
-    }, [query, currentPage, apiKey]); // Added apiKey to dependency array
+    }, [query, currentPage, apiKey]);
 
     if (loading) {
         return (
@@ -62,6 +65,9 @@ function SearchResults() {
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
             </div>
         );
+    }
+    if (error) {
+        return <ErrorDisplay message={error} />;
     }
 
     return (

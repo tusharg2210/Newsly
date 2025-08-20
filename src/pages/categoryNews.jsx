@@ -8,7 +8,7 @@ function CategoryNews() {
     
 
     
-    const apiKey = import.meta.env.VITE_NEWS_API_KEY || import.meta.env.VITE_NEWS_API_KEY_1;
+    const apiKey =  'yourapikey';
     let url = `https://newsapi.org/v2/everything?q=${categoryName}&apiKey=${apiKey}`;
 
     const [news, setNews] = useState([]);

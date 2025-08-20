@@ -2,31 +2,51 @@ import React from "react";
 
 import { useState, useEffect } from "react";
 import NewsCard from "./newsCard.jsx";
+import ErrorDisplay from "./errorDisplay.jsx";
 
 
 function NewsSection() {
-    const apiKey = import.meta.env.VITE_NEWS_API_KEY || import.meta.env.VITE_NEWS_API_KEY_1;
+    const apiKey =  'yourapikey';
     let url = `https://newsapi.org/v2/everything?q=keyword&apiKey=${apiKey}`;
 
     const [newsArticles, setNewsArticles] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        setLoading(true);
         const fetchNews = async () => {
-            const response = await fetch(url);
-            const data = await response.json();
-            console.log(data);
-            setNewsArticles(data.articles);
-            setTotalPages(Math.ceil(data.totalResults / 9)); // Assuming 9 articles per page
+            setLoading(true);
+            setError(null); // Reset error on new fetch
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (!response.ok || data.status === 'error') {
+                    // Throw an error if the API indicates a failure
+                    throw new Error(data.message || 'Failed to fetch news.');
+                }
+
+                setNewsArticles(data.articles);
+                setTotalPages(Math.ceil(data.totalResults / 9));
+            } catch (err) {
+                console.error("Error fetching news:", err);
+                setError(err.message); // Set the error state
+            } finally {
+                setLoading(false);
+            }
         };
         fetchNews();
     }, []);
+
     useEffect(() => {
         setLoading(false);
     }, [newsArticles]);
+
+    if (error) {
+        return <ErrorDisplay message={error} />;
+    }
 
     if (loading) {
         return (

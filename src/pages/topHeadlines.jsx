@@ -1,32 +1,43 @@
 import NewsCard from "../components/newsCard";
 import { useState, useEffect } from "react";
+import ErrorDisplay from "../components/errorDisplay";
 
 function TopHeadlines() {
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [error, setError] = useState(null);
 
     
-    const apiKey = import.meta.env.VITE_NEWS_API_KEY || import.meta.env.VITE_NEWS_API_KEY_1;
+    const apiKey =  'yourapikey';
     let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
     
     useEffect(() => {
         const fetchNews = async () => {
+            setLoading(true);
+            setError(null);
             try {
+                const url = `https://newsapi.org/v2/top-headlines?country=us&page=${currentPage}&pageSize=9&apiKey=${apiKey}`;
                 const response = await fetch(url);
                 const data = await response.json();
+
+                if (!response.ok || data.status === 'error') {
+                    throw new Error(data.message || 'Failed to fetch headlines.');
+                }
+
                 setNews(data.articles);
-                setTotalPages(Math.ceil(data.totalResults / 6)); // Assuming 6 articles per page
-            } catch (error) {
-                console.error("Error fetching news:", error);
+                setTotalPages(Math.ceil(data.totalResults / 9));
+            } catch (err) {
+                console.error("Error fetching news:", err);
+                setError(err.message);
             } finally {
                 setLoading(false);
             }
         };
 
         fetchNews();
-    }, []);
+    }, [currentPage]);
 
 
     if (loading) {
@@ -36,6 +47,11 @@ function TopHeadlines() {
             </div>
         );
     }
+
+    if (error) {
+        return <ErrorDisplay message={error} />;
+    }
+
     if (!news.length) {
         return (
             <div className="flex flex-col items-center justify-center h-screen text-center">

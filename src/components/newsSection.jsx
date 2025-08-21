@@ -6,8 +6,7 @@ import ErrorDisplay from "./errorDisplay.jsx";
 
 
 function NewsSection() {
-    const apiKey = import.meta.env.VITE_NEWS_API_KEY || import.meta.env.VITE_NEWS_API_KEY_1 || '6fded117301c45be8677c8120629902e';
-    let url = `https://newsapi.org/v2/everything?q=keyword&apiKey=${apiKey}`;
+    let url = `https://news-api-wrapper.vercel.app/api/latest`;
 
     const [newsArticles, setNewsArticles] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -21,12 +20,13 @@ function NewsSection() {
             setError(null); // Reset error on new fetch
             try {
                 const response = await fetch(url);
-                const data = await response.json();
-                
-                if (!response.ok || data.status === 'error') {
+
+                if (!response.ok) {
                     // Throw an error if the API indicates a failure
-                    throw new Error(data.message || 'Failed to fetch news.');
+                    throw new Error('Failed to fetch news.');
                 }
+
+                const data = await response.json();
 
                 setNewsArticles(data.articles);
                 setTotalPages(Math.ceil(data.totalResults / 9));
@@ -38,7 +38,7 @@ function NewsSection() {
             }
         };
         fetchNews();
-    }, []);
+    }, [url]);
 
     useEffect(() => {
         setLoading(false);
@@ -70,12 +70,12 @@ function NewsSection() {
             <div className="container mx-auto dark:text-white">
                 <h2 className="text-5xl py-6 text-center font-serif hover:underline hover:scale-115 transform-transition duration-200 font-bold mb-6">Latest News</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {newsArticles.slice((currentPage - 1) * 9, currentPage * 9).map((news) => (
-                        <NewsCard  news={news} />
+                    {newsArticles.map((news) => (
+                        <NewsCard key={news.url} news={news} />
                     ))}
                 </div>
             </div>
-            <div className="flex justify-center mt-8">
+            {/* <div className="flex justify-center mt-8">
                 <button
                     onClick={() => {
                         setCurrentPage((prev) => Math.max(prev - 1, 1));
@@ -98,7 +98,7 @@ function NewsSection() {
                 >
                     Next
                 </button>
-            </div>
+            </div> */}
         </section>
         </div>
     );

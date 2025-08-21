@@ -1,7 +1,5 @@
-// src/pages/searchResults.jsx
-
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; // Import useLocation
+import { useLocation } from 'react-router-dom';
 import NewsCard from '../components/newsCard';
 import ErrorDisplay from '../components/errorDisplay';
 
@@ -18,7 +16,6 @@ function SearchResults() {
     const [error, setError] = useState(null);
 
     const articlesPerPage = 9;
-    const apiKey = import.meta.env.VITE_NEWS_API_KEY || import.meta.env.VITE_NEWS_API_KEY_1 || '6fded117301c45be8677c8120629902e';
 
     useEffect(() => {
         // Reset to page 1 when query in the URL changes
@@ -36,7 +33,7 @@ function SearchResults() {
             setLoading(true);
             setError(null);
             try {
-                const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&page=${currentPage}&pageSize=${articlesPerPage}&apiKey=${apiKey}`;
+                const url = `https://news-api-wrapper.vercel.app/api/search?q=${query}&page=${currentPage}&pageSize=${articlesPerPage}`;
                 const response = await fetch(url);
                 const data = await response.json();
 
@@ -57,7 +54,7 @@ function SearchResults() {
         };
 
         fetchSearchResults();
-    }, [query, currentPage, apiKey]);
+    }, [query, currentPage]);
 
     if (loading) {
         return (

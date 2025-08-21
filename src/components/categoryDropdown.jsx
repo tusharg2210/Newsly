@@ -43,7 +43,7 @@ function CategoryDropdown() {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="absolute left-1/2 -translate-x-1/2 mt-4 w-screen max-w-sm origin-top-right rounded-xl bg-white dark:bg-gray-800 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
+                        className="absolute left-45 -translate-x-1/2 mt-4 w-screen max-w-sm origin-top-right rounded-xl bg-white dark:bg-gray-800 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none"
                     >
                         <div className="p-4 ">
                             {categoryItems.map((item) => (

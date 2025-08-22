@@ -9,14 +9,13 @@ function TopHeadlines() {
     const [totalPages, setTotalPages] = useState(1);
     const [error, setError] = useState(null);
 
-    let url = `https://news-api-wrapper.vercel.app/api/headlines?country=us`;
+    let url = `https://news-api-wrapper.vercel.app/api/headlines?country=us&page=${currentPage}&pageSize=9`;
     
     useEffect(() => {
         const fetchNews = async () => {
             setLoading(true);
             setError(null);
             try {
-                const url = `https://newsapi.org/v2/top-headlines?country=us&page=${currentPage}&pageSize=9&apiKey=${apiKey}`;
                 const response = await fetch(url);
                 const data = await response.json();
 
